@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.telephony.PhoneNumberFormattingTextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -30,8 +31,9 @@ public class Main extends Activity {
         // Handle button clicks by searching
         ((Button) findViewById(R.id.search)).setOnClickListener(new OnClickListener() {
             public void onClick(View arg0) {
-                startActivity(new Intent(ContactsContract.Intents.SHOW_OR_CREATE_CONTACT, Uri.fromParts("tel", number
-                        .getText().toString(), "")));
+                Uri uri = Uri.fromParts("tel", number.getText().toString(), "");
+                Log.d("ContactPicker", "uri for intent: [" + uri.toString() + "]");
+                startActivity(new Intent(ContactsContract.Intents.SHOW_OR_CREATE_CONTACT, uri));
             }
         });
     }
